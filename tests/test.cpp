@@ -10,7 +10,7 @@
 #include <fstream>
 
 TEST(Parse, Text){
-std::string json = "{\n"
+Json object("{\n"
                    "    \"lastname\" : \"Ivanov\",\n"
                    "    \"firstname\" : \"Ivan\",\n"
                    "    \"age\" : 25,\n"
@@ -22,8 +22,8 @@ std::string json = "{\n"
                    "    \t\"city\" : \"Moscow\",\n"
                    "        \"street\" : \"Vozdvijenka\"\n"
                    "    }\n"
-                   "}";
-Json object = Json::parse(json);
+                   "}");
+//Json object = Json::parse(json);
 EXPECT_EQ(std::any_cast<std::string>(object["lastname"]),
 "Ivanov");
 EXPECT_EQ(std::any_cast<bool>(object["islegal"]),
