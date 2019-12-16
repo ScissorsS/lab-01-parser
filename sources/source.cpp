@@ -83,10 +83,7 @@ Json::parse_array(const std::string &str, size_t &pos) {
             if (state == Act::find_comma_or_end) {
                 state = Act::find_value;
             }
-        } else if (isdigit(str[i]) || isalpha(str[i])) {
-            if ((str[i] == '+' && isdigit(str[i + 1]) != 0)
-                || (str[i] == '-' && isdigit(str[i + 1])) != 0) i++;
-            if (str[i] >= '0' && str[i] <= '9') {
+        } else if (isdigit(str[i])) {
                 if (state == Act::find_value) {
                     res.emplace_back(parse_number(str, i));
                     state = Act::find_comma_or_end;
@@ -98,7 +95,6 @@ Json::parse_array(const std::string &str, size_t &pos) {
                 }
             }
         }
-    }
     res.clear();
     return res;
 }
