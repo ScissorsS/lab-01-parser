@@ -147,10 +147,7 @@ Json::parse_object(const std::string &str, size_t &pos) {
             if (state == Act::find_colon) {
                 state = Act::find_value;
             }
-        } else if (isdigit(str[i]) || isalpha(str[i])) {
-            if ((str[i] == '+'|| str[i] == '-')
-                  && isdigit(str[i + 1])) i++;
-            if (str[i] >= '0' && str[i] <= '9') {
+        } else if (isdigit(str[i])) {
                 if (state == Act::find_value) {
                     res[key] = parse_number(str, i);
                     state = Act::find_comma_or_end;
@@ -162,7 +159,6 @@ Json::parse_object(const std::string &str, size_t &pos) {
                 }
             }
         }
-    }
     throw std::bad_any_cast();
 }
 
