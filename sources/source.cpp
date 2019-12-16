@@ -50,48 +50,48 @@ void Json::skip(const std::string str, size_t &pos) {
 std::vector<std::any>
 Json::parse_array(const std::string &str, size_t &pos) {
     std::vector<std::any> res;
-    auto state = Act::find_value;
+    auto status = Act::find_value;
     for (size_t i = pos; i < str.length(); i++) {
         skip(str, i);
         if (str[i] == '[') {
-            if (state == Act::find_value) {
+            if (status == Act::find_value) {
                 i++;
                 res.emplace_back(Json(parse_array(str, i)));
-                state = Act::find_comma_or_end;
+                status = Act::find_comma_or_end;
             }
         } else if (str[i] == ']') {
-            if (state == Act::find_comma_or_end) {
+            if (status == Act::find_comma_or_end) {
                 pos = i;
                 return res;
             }
-            if (state == Act::find_value) {
+            if (status == Act::find_value) {
                 pos = i;
                 return res;
             }
         } else if (str[i] == '{') {
-            if (state == Act::find_value) {
+            if (status == Act::find_value) {
                 i++;
                 res.emplace_back(Json(parse_object(str, i)));
-                state = Act::find_comma_or_end;
+                status = Act::find_comma_or_end;
             }
         } else if (str[i] == '"') {
-            if (state == Act::find_value) {
+            if (status == Act::find_value) {
                 res.emplace_back(parse_string(str, i));
-                state = Act::find_comma_or_end;
+                status = Act::find_comma_or_end;
             }
         } else if (str[i] == ',') {
-            if (state == Act::find_comma_or_end) {
-                state = Act::find_value;
+            if (status == Act::find_comma_or_end) {
+                status = Act::find_value;
             }
         } else if (isdigit(str[i])) {
-                if (state == Act::find_value) {
+                if (status == Act::find_value) {
                     res.emplace_back(parse_number(str, i));
-                    state = Act::find_comma_or_end;
+                    status = Act::find_comma_or_end;
                 }
             } else if (str[i] == 'f' || str[i] == 't') {
-                if (state == Act::find_value) {
+                if (status == Act::find_value) {
                     res.emplace_back(parse_bool(str, i));
-                    state = Act::find_comma_or_end;
+                    status = Act::find_comma_or_end;
                 }
             }
         }
