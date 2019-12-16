@@ -7,7 +7,7 @@ int Json::parse_number(const std::string &number, size_t &pos) const {
     while (number[pos] != ',') {
         if (number[pos] == ']') break;
         if (number[pos] == '}') break;
-        if (!isspace(number[pos])) res.push_back(number[pos]);
+        if (!isspace(number[pos])) res.emplace_back(number[pos]);
         pos++;
     }
     pos--;
@@ -21,7 +21,7 @@ std::string Json::parse_string(const std::string str, size_t &pos) const {
     std::string res;
     pos++;
     while (str[pos] != '"') {
-        res.push_back(str[pos]);
+        res.emplace_back(str[pos]);
         pos++;
     }
     return res;
@@ -30,7 +30,7 @@ std::string Json::parse_string(const std::string str, size_t &pos) const {
 bool Json::parse_bool(const std::string b, size_t &pos) const {
     std::string res;
     while (b[pos] != 'e') {
-        res.push_back(b[pos]);
+        res.emplace_back(b[pos]);
         pos++;
     }
     res.push_back('e');
