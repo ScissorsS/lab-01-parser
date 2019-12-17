@@ -61,7 +61,7 @@ public:
             auto &data =
                     std::any_cast<std::map<std::string, std::any> &>(_data);
             return data[key];
-        } else{
+        } else {
             throw std::bad_any_cast();
         }
     }
