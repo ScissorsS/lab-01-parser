@@ -27,20 +27,25 @@ std::string Json::parse_string(const std::string str, size_t &pos) const {
     return res;
 }
 
-bool Json::parse_bool(const std::string b, size_t &pos) const {
+bool Json::parse_bool(const std::string b, size_t &pos) {
     std::string res;
-    while (b[pos] != 'e') {
+    for (size_t i = 0; i < 4; ++i) {
         res.push_back(b[pos]);
         pos++;
     }
-    res.push_back('e');
-    if (res == "false") {
-        return false;
-    } else if (res == "true") {
+    if (res == "true") {
         return true;
-    } else {
-        throw std::bad_any_cast();
-    }
+    } else if (res == "fals") {
+        return false;
+    } else throw std::bad_any_cast();
+    //res.push_back('e');
+    //if (res == "false") {
+    //    return false;
+    //} else if (res == "true") {
+        return true;
+    //} else {
+    //    throw std::bad_any_cast();
+    //}
 }
 
 void Json::skip(const std::string str, size_t &pos) {
