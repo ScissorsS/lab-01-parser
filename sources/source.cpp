@@ -40,14 +40,6 @@ bool Json::parse_bool(const std::string b, size_t &pos) {
     } else {
         throw std::bad_any_cast();
     }
-    //res.push_back('e');
-    //if (res == "false") {
-    //    return false;
-    //} else if (res == "true") {
-        return true;
-    //} else {
-    //    throw std::bad_any_cast();
-    //}
 }
 
 void Json::skip(const std::string str, size_t &pos) {
