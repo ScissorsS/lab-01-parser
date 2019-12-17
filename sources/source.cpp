@@ -38,7 +38,7 @@ bool Json::parse_bool(const std::string b, size_t &pos) const {
         return false;
     } else if (res == "true") {
         return true;
-    }else {
+    } else {
         throw std::bad_any_cast();
     }
 }
