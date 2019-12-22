@@ -1,4 +1,4 @@
-// Copyright 2018 Your Name <your_email>
+// Copyright 2018 Your Name <your_email> 
 #include "header.hpp"
 
 int Json::parse_number(const std::string &number, size_t &pos) const {
